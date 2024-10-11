@@ -4,31 +4,31 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nagad_ui/Controller/login_controller.dart';
+import 'package:nagad_ui/Widgets/custom_pin_textField.dart';
 import 'package:nagad_ui/Widgets/custom_rounded_button.dart';
 import 'package:nagad_ui/Widgets/custom_textField.dart';
 import 'package:nagad_ui/Widgets/language_button_widget.dart';
 
+import '../Controller/pin_controller.dart';
 import '../Route/Routes.dart';
 
-class LoginScreen extends StatelessWidget {
-  LoginScreen({super.key});
+class PinScreen extends StatelessWidget {
+  PinScreen({super.key});
 
-  final LoginController loginController = Get.put(LoginController());
+  final PinController pinController = Get.put(PinController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFFEC1C24),
       body: SafeArea(
-        bottom: false,
-        top: true,
         child: SingleChildScrollView(
           child: Container(
             color: Colors.white,
             height: Get.height,
             child: Padding(
               padding:
-                  EdgeInsets.only(left: 20.w, right: 20.w, top: 28.h),
+              EdgeInsets.only(left: 20.w, right: 20.w, top: 28.h, bottom: 29),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -39,30 +39,49 @@ class LoginScreen extends StatelessWidget {
                   ),
                   Center(
                       child: SvgPicture.asset(
-                    "images/ic_nagad.svg",
-                    height: 125.w,
-                    width: 163.88.h,
-                  )),
+                        "images/ic_nagad.svg",
+                        height: 125.w,
+                        width: 163.88.h,
+                      )),
                   SizedBox(
                     height: 14.12.h,
                   ),
                   Center(
                       child: Text(
-                    "Welcome",
-                    style: GoogleFonts.inter(
-                        fontSize: 22.sp,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFF000000)),
-                  )),
+                        "Welcome",
+                        style: GoogleFonts.inter(
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xFF969696)),
+                      )),
+                  SizedBox(height: 10,),
+                  Center(
+                      child: Text(
+                        "01786241171",
+                        style: GoogleFonts.inter(
+                            fontSize: 18.sp,
+                            fontWeight: FontWeight.w500,
+                            color: Color(0xFF000000)),
+                      )),
                   SizedBox(
                     height: 65.h,
                   ),
 
-                  ///Mobile Number TextField
-                  CustomTextField(imagePath: 'images/ic_call.svg', labelText: 'Mobile Number'),
+                  ///Pin TextField
+                  CustomPinTextField(imagePath: 'images/ic_lock.svg', labelText: 'Pin'),
+                  Padding(
+                    padding:  EdgeInsets.only(left: 30.w,top: 6),
+                    child: Text(
+                      "Enter 4 digit pin",
+                      style: GoogleFonts.inter(
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF969696)),
+                    ),
+                  ),
 
                   SizedBox(
-                    height: 14.12.h,
+                    height: 28.h,
                   ),
 
                   ///custom Button
@@ -71,16 +90,16 @@ class LoginScreen extends StatelessWidget {
                       child: CustomRoundedButton(
                         height: 40.0.h,
                         width: 240.0.w,
-                        text: 'Next',
-                        background: loginController.isNumberValid
+                        text: 'Login',
+                        background: pinController.isNumberValid
                             ? Color(0xFFEC1C24)
                             : Colors.white,
                         borderColor: Colors.red,
                         // shadowColor: Colors.grey, // Optional shadow color
                         onPressed: () {
-                          Get.toNamed(Routes.pin);
+                          Get.toNamed(Routes.verifyOtp);
                         },
-                        textColor: loginController.isNumberValid
+                        textColor: pinController.isNumberValid
                             ? Colors.white
                             : Color(0xFF969696),
                         fontSize: 16.0.sp,
@@ -89,33 +108,6 @@ class LoginScreen extends StatelessWidget {
                       ),
                     );
                   }),
-
-                  SizedBox(
-                    height: 25.h,
-                  ),
-
-                  Center(
-                      child: Text(
-                    "Not registered yet?",
-                    style: GoogleFonts.inter(
-                        fontSize: 11.sp,
-                        fontWeight: FontWeight.w500,
-                        color: Color(0xFF969696)),
-                  )),
-                  SizedBox(
-                    height: 10.h,
-                  ),
-                  GestureDetector(
-                    onTap: () {},
-                    child: Center(
-                        child: Text(
-                      "Register Now",
-                      style: GoogleFonts.inter(
-                          fontSize: 11.sp,
-                          fontWeight: FontWeight.w500,
-                          color: Color(0xFFEC1C24)),
-                    )),
-                  ),
 
                   SizedBox(height: 184.h,),
                   Row(

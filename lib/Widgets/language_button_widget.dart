@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:nagad_ui/Controller/language_controller.dart';
 import 'package:nagad_ui/Controller/login_controller.dart';
 
 class LanguageToggleWidget extends StatelessWidget {
-  final LoginController loginController;
-
-  LanguageToggleWidget({required this.loginController});
+  final LanguageController languageController = Get.put(LanguageController());
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +29,7 @@ class LanguageToggleWidget extends StatelessWidget {
               // Bengali button
               GestureDetector(
                 onTap: () {
-                  loginController.changeLanguage.value = false;
+                  languageController.changeLanguage.value = false;
                 },
                 child: Container(
                   width: 34.w, // width adjusted for each button
@@ -39,7 +38,7 @@ class LanguageToggleWidget extends StatelessWidget {
                       topLeft: Radius.circular(63.r),
                       bottomLeft: Radius.circular(63.r),
                     ),
-                    color: loginController.changeLanguage.value == false
+                    color: languageController.changeLanguage.value == false
                         ? Colors.red
                         : Colors.transparent,
                   ),
@@ -48,7 +47,7 @@ class LanguageToggleWidget extends StatelessWidget {
                       "বাং",
                       style: GoogleFonts.inter(
                         fontSize: 9.sp,
-                        color: loginController.changeLanguage.value == false
+                        color: languageController.changeLanguage.value == false
                             ? Colors.white
                             : Color(0xFFAFAFAF),
                       ),
@@ -59,7 +58,7 @@ class LanguageToggleWidget extends StatelessWidget {
               // English button
               GestureDetector(
                 onTap: () {
-                  loginController.changeLanguage.value = true;
+                  languageController.changeLanguage.value = true;
                 },
                 child: Container(
                   width: 35.w, // width adjusted for each button
@@ -68,7 +67,7 @@ class LanguageToggleWidget extends StatelessWidget {
                       topRight: Radius.circular(63.r),
                       bottomRight: Radius.circular(63.r),
                     ),
-                    color: loginController.changeLanguage.value == true
+                    color: languageController.changeLanguage.value == true
                         ? Colors.red
                         : Colors.transparent,
                   ),
@@ -77,7 +76,7 @@ class LanguageToggleWidget extends StatelessWidget {
                       "ENG",
                       style: GoogleFonts.inter(
                         fontSize: 9.sp,
-                        color: loginController.changeLanguage.value == true
+                        color: languageController.changeLanguage.value == true
                             ? Colors.white
                             : Color(0xFFAFAFAF),
                       ),

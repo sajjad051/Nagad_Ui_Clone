@@ -6,22 +6,24 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
 import 'package:nagad_ui/Controller/login_controller.dart';
 
-class CustomTextField extends StatefulWidget {
+import '../Controller/pin_controller.dart';
+
+class CustomPinTextField extends StatefulWidget {
   final String imagePath;
   final String labelText;
 
   // Constructor to accept imagePath and labelText
-  CustomTextField({
+  CustomPinTextField({
     required this.imagePath,
     required this.labelText,
   });
 
   @override
-  _CustomTextFieldState createState() => _CustomTextFieldState();
+  _CustomPinTextFieldState createState() => _CustomPinTextFieldState();
 }
 
-class _CustomTextFieldState extends State<CustomTextField> {
-  final LoginController loginController = Get.put(LoginController());
+class _CustomPinTextFieldState extends State<CustomPinTextField> {
+  final PinController pinController = Get.put( PinController());
   final FocusNode focusNode = FocusNode();
 
   @override
@@ -29,7 +31,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
     super.initState();
     // Listen for focus changes
     focusNode.addListener(() {
-      loginController.setFocus(focusNode.hasFocus);
+      pinController.setFocus(focusNode.hasFocus);
     });
   }
 
@@ -53,10 +55,13 @@ class _CustomTextFieldState extends State<CustomTextField> {
           Expanded(
             child: TextField(
               onChanged: (value) {
-                loginController.updateMobileNumber(value);
+                pinController.updateMobileNumber(value);
               },
+              obscureText: true,
               focusNode: focusNode,
-              maxLength: 11,
+              obscuringCharacter: '●'.toString(),
+
+              maxLength: 4,
               inputFormatters: <TextInputFormatter>[
                 FilteringTextInputFormatter.digitsOnly, // Allow only digits
               ],
@@ -64,7 +69,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                 labelText: widget.labelText, // Use labelText from constructor
                 labelStyle: GoogleFonts.inter(
                   fontSize: 15.sp,
-                  color: loginController.isFocused.value
+                  color: pinController.isFocused.value
                       ? Colors.red
                       : Color(0xFF969696),
                   fontWeight: FontWeight.w500,

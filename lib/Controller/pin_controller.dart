@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
-class LoginController extends GetxController {
+class PinController extends GetxController {
 
 
 
@@ -14,9 +14,9 @@ class LoginController extends GetxController {
   }
 
   void updateMobileNumber(String value) {
-    mobileNumber.value = value; // Update the mobile number
+    mobileNumber.value = value;
   }
-  bool get isNumberValid => mobileNumber.value.length == 11; // Check if length is 11
+  bool get isNumberValid => mobileNumber.value.length == 4; // Check if length is 4
 
 
   login() {
